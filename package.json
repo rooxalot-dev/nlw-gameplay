@@ -3,6 +3,7 @@
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
+    "start:wsl": "REACT_NATIVE_PACKAGER_HOSTNAME=`dig host.docker.internal +short` expo start --lan",
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject"
