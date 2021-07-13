@@ -3,26 +3,15 @@ import { theme } from '../../global/styles/theme';
 
 export const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    width: 274,
-    height: 56,
-    borderRadius: 8,
-    backgroundColor: theme.colors.primary
-  },
-  iconWrapper: {
-    width: 56,
-    height: 56,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRightWidth: StyleSheet.hairlineWidth,
-    borderRightColor: `rgba(0, 0, 0, 0.3)`
+    width: 56,
+    height: 56,
+    borderRadius: 8,
+    backgroundColor: theme.colors.primary,
+
   },
-  buttonText: {
-    flex: 1,
-    fontSize: 15,
-    fontFamily: theme.fonts.text500,
+  icon: {
     color: theme.colors.heading,
-    textAlign: 'center'
   }
 });

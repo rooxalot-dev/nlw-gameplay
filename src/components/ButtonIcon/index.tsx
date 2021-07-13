@@ -1,22 +1,19 @@
-import React from "react";
-import { View, Text, Image, TouchableOpacity, TouchableOpacityProps } from "react-native";
+import React, { ReactNode } from "react";
+import { Text } from "react-native";
+
+import { RectButton, RectButtonProps } from "react-native-gesture-handler";
 import { styles } from './styles';
 
-type ButtonIconProps = TouchableOpacityProps & {
-  title: string,
-  icon?: any
+type ButtonIconProps = RectButtonProps & {
+  icon: ReactNode
 };
 
-export function ButtonIcon({ title, icon, ...rest }: ButtonIconProps) {
+export function ButtonIcon({ icon, ...rest }: ButtonIconProps) {
   return (
-    <TouchableOpacity style={styles.container} {...rest}>
-      {icon &&
-        <View style={styles.iconWrapper}>
-          <Image source={icon} />
-        </View>
-      }
-
-      <Text style={styles.buttonText}>{title}</Text>
-    </TouchableOpacity>
+    <RectButton style={styles.container} {...rest}>
+      <Text style={styles.icon}>
+        {icon}
+      </Text>
+    </RectButton>
   );
 }

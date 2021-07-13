@@ -8,6 +8,8 @@ import { StatusBar } from 'expo-status-bar';
 
 import { SignIn } from './src/screens/SignIn';
 import { Background } from './src/components/Background';
+import { Home } from './src/screens/Home';
+import { Routes } from './src/routes';
 
 
 export default function App() {
@@ -24,12 +26,10 @@ export default function App() {
     return <AppLoading />
   } else {
     return (
-      <>
+      <Background>
         <StatusBar style="inverted" translucent />
-        <Background>
-          <SignIn />
-        </Background>
-      </>
+        <Routes />
+      </ Background>
     );
   }
 
