@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
     width: 274,
     height: 56,
     borderRadius: 8,
-    backgroundColor: theme.color.primary
+    backgroundColor: theme.colors.primary
   },
   iconWrapper: {
     width: 56,
@@ -21,7 +21,8 @@ export const styles = StyleSheet.create({
   buttonText: {
     flex: 1,
     fontSize: 15,
-    color: theme.color.heading,
+    fontFamily: theme.fonts.text500,
+    color: theme.colors.heading,
     textAlign: 'center'
   }
 });
