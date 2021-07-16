@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { View } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
@@ -8,17 +8,25 @@ import { ButtonIcon } from "../../components/ButtonIcon";
 import { CategoryList } from "../../components/CategoryList";
 
 export function Home() {
+  const [selectedCategory, setSelectedCategory] = useState<string>('');
+
+  const handleSelectCategory = (categoryId: string) => {
+    setSelectedCategory(categoryId);
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Profile />
-        <ButtonIcon
-          icon={<MaterialCommunityIcons name="plus" size={26} />}
-        />
+        <ButtonIcon>
+          <MaterialCommunityIcons name="plus" size={26} />
+        </ButtonIcon>
       </View>
 
       <View>
-        <CategoryList />
+        <CategoryList
+          selectedCategory={selectedCategory}
+          onSetCategory={handleSelectCategory} />
       </View>
 
     </View>

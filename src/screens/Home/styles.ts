@@ -10,6 +10,7 @@ export const styles = StyleSheet.create({
     marginTop: getStatusBarHeight() + 26,
     paddingHorizontal: 24,
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    marginBottom: 40
   },
 });

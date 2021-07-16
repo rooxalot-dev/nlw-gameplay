@@ -3,7 +3,10 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    minHeight: 120,
+    maxHeight: 120,
+    paddingLeft: 24
   },
   category: {}
 });

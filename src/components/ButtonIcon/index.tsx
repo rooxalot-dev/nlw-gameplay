@@ -5,14 +5,14 @@ import { RectButton, RectButtonProps } from "react-native-gesture-handler";
 import { styles } from './styles';
 
 type ButtonIconProps = RectButtonProps & {
-  icon: ReactNode
+  children: ReactNode
 };
 
-export function ButtonIcon({ icon, ...rest }: ButtonIconProps) {
+export function ButtonIcon({ children, ...rest }: ButtonIconProps) {
   return (
     <RectButton style={styles.container} {...rest}>
       <Text style={styles.icon}>
-        {icon}
+        {children}
       </Text>
     </RectButton>
   );
