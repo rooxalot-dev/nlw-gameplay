@@ -13,4 +13,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginBottom: 40
   },
+  content: {
+    marginTop: 40,
+  }
 });
