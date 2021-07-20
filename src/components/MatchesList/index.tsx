@@ -14,7 +14,12 @@ function ItemSeparator() {
   return (
     <View style={{
       height: StyleSheet.hairlineWidth,
-      backgroundColor: theme.colors.secondary40
+      width: '75%',
+      alignSelf: 'flex-end',
+      marginTop: -10,
+      marginBottom: 10,
+      borderBottomWidth: StyleSheet.hairlineWidth,
+      borderBottomColor: theme.colors.secondary40,
     }} />
   )
 };
@@ -26,6 +31,7 @@ export function MatchesList({ matches }: MatchesListProps) {
         data={matches}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (<Match match={item} />)}
+        ItemSeparatorComponent={() => (<ItemSeparator />)}
 
       />
     </View>

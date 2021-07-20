@@ -14,8 +14,6 @@ export const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: theme.colors.secondary40,
   },
   header: {
     flexDirection: 'row',

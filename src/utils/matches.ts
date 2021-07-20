@@ -1,5 +1,5 @@
 import { MatchModel } from '../models/MatchModel';
-import RankedSvg from '../assets/ranked.svg';
+import RedDeadRedemption2Svg from '../assets/rdr2.svg';
 
 export const matches: MatchModel[] = [
   {
@@ -7,7 +7,7 @@ export const matches: MatchModel[] = [
     guild: {
       id: '1',
       name: 'Lendários',
-      icon: RankedSvg,
+      icon: RedDeadRedemption2Svg,
       owner: true
     },
     category: '1',
@@ -20,7 +20,7 @@ export const matches: MatchModel[] = [
     guild: {
       id: '1',
       name: 'Lendários',
-      icon: RankedSvg,
+      icon: RedDeadRedemption2Svg,
       owner: false
     },
     category: '1',
@@ -33,7 +33,7 @@ export const matches: MatchModel[] = [
     guild: {
       id: '1',
       name: 'Lendários',
-      icon: RankedSvg,
+      icon: RedDeadRedemption2Svg,
       owner: false
     },
     category: '1',

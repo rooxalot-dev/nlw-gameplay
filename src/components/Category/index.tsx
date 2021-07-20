@@ -9,21 +9,20 @@ import { styles } from "./styles";
 
 type CategoryProps = RectButtonProps & {
   category: CategoryModel,
+  hasCheck?: boolean;
   checked: boolean;
 }
 
-export function Category({ category, checked, ...rest }: CategoryProps) {
+export function Category({ category, checked, hasCheck = false, ...rest }: CategoryProps) {
   const { title, icon: Icon } = category;
   const { secondary50, secondary70 } = theme.colors;
 
   return (
     <RectButton {...rest}>
       <LinearGradient style={styles.container} colors={[secondary70, secondary50]}>
-        <View style={[styles.content, { opacity: checked ? 1 : 0.4 }]}>
-          <View style={!checked ? styles.check : styles.checked} />
-
+        {hasCheck && <View style={!checked ? styles.check : styles.checked} />}
+        <View style={[styles.content, { opacity: checked ? 1 : 0.2 }]}>
           <Icon style={styles.icon} width={48} height={48} />
-
           <Text style={styles.title}>{title}</Text>
         </View>
       </LinearGradient>

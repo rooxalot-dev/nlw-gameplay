@@ -7,11 +7,12 @@ import { categories } from "../../utils/categories";
 import { Category } from "../Category";
 
 type CategoryListProps = {
+  hasCheck?: boolean;
   selectedCategory: string;
   onSetCategory: (categoryId: string) => void;
 }
 
-export function CategoryList({ selectedCategory, onSetCategory }: CategoryListProps) {
+export function CategoryList({ hasCheck = false, selectedCategory, onSetCategory }: CategoryListProps) {
   return (
     <View style={styles.container}>
       <ScrollView
@@ -20,7 +21,8 @@ export function CategoryList({ selectedCategory, onSetCategory }: CategoryListPr
         contentContainerStyle={{ paddingRight: 40 }}>
         {categories.map((category) =>
           <Category
-            onPress={() => onSetCategory(category.id)}
+            hasCheck={hasCheck}
+            onPress={() => hasCheck && onSetCategory(category.id)}
             checked={selectedCategory === category.id}
             key={category.id}
             category={category}
