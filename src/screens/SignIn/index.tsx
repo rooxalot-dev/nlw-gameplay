@@ -7,8 +7,6 @@ import { ButtonTextIcon } from '../../components/ButtonTextIcon';
 import illustrationImg from '../../assets/illustration.png';
 import DiscordImg from '../../assets/discord.png';
 
-
-
 export function SignIn() {
   const navigation = useNavigation();
 
@@ -37,10 +35,13 @@ export function SignIn() {
         </Text>
       </View>
 
-      <ButtonTextIcon
-        title="Entrar com Discord"
-        icon={DiscordImg}
-        onPress={handleSignIn} />
+      <View style={{ width: '100%', paddingHorizontal: 24 }}>
+        <ButtonTextIcon
+          title="Entrar com Discord"
+          icon={DiscordImg}
+          onPress={handleSignIn}
+        />
+      </View>
     </View>
   );
 }

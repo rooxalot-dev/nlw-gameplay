@@ -8,6 +8,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 10,
     paddingHorizontal: 24,
+    marginBottom: -12,
   },
   icon: {
     marginRight: 20
