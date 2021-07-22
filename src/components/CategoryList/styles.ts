@@ -6,7 +6,6 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     minHeight: 120,
     maxHeight: 120,
-    paddingLeft: 24
   },
   category: {}
 });
