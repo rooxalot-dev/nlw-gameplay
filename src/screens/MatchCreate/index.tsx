@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, TextInputProps, KeyboardAvoidingView, Platform } from "react-native";
+import { View, Text, TextInputProps, KeyboardAvoidingView, Platform, Modal, FlatList } from "react-native";
 import { RectButton, ScrollView } from "react-native-gesture-handler";
 import { Feather } from '@expo/vector-icons';
 
@@ -12,14 +12,33 @@ import RedDeadRedemption2Svg from '../../assets/rdr2.svg';
 
 import { styles } from "./styles";
 import { theme } from "../../global/styles/theme";
+import { GuildModel } from "../../models/MatchModel";
+import { guilds } from "../../utils/guids";
 import { LinearGradient } from "expo-linear-gradient";
+import { ModalView } from "../../components/ModalView";
+import { ItemSeparator } from "../../components/ItemSeparator";
+import { Guild } from "../../components/Guild";
+import { GuildsList } from "../../components/GuildsList";
+
+
 
 
 export function MatchCreate() {
   const [selectedCategory, setSelectedCategory] = useState<string>('');
+  const [guildsModalVisible, setGuildsModalVisible] = useState(false);
+  const [selectedGuild, setSelectedGuild] = useState<GuildModel | null>(null);
 
   const handleSelectCategory = (categoryId: string) => {
     selectedCategory === categoryId ? setSelectedCategory('') : setSelectedCategory(categoryId);
+  };
+
+  const handleOpenGuild = () => {
+    setGuildsModalVisible(true);
+  };
+
+  const handleSelectGuild = (selectedGuild: GuildModel) => {
+    setSelectedGuild(selectedGuild);
+    setGuildsModalVisible(false);
   };
 
   return (
@@ -39,19 +58,18 @@ export function MatchCreate() {
         </View>
 
         <View style={styles.form}>
-          <RectButton>
+          <RectButton onPress={handleOpenGuild}>
             <View style={styles.serverSelect}>
-              {/* <LinearGradient
-              style={styles.serverImage}
-              colors={[
-                theme.colors.secondary70,
-                theme.colors.secondary40
-              ]}
-            /> */}
-              <RedDeadRedemption2Svg />
+
+              {!selectedGuild ? <LinearGradient style={styles.serverImage} colors={[theme.colors.secondary70, theme.colors.secondary40]} />
+                :
+                <RedDeadRedemption2Svg />
+              }
 
               <View style={styles.serverSelectBody}>
-                <Text style={styles.label}>Selecione um servidor</Text>
+                <Text style={styles.label}>
+                  {selectedGuild?.name ? selectedGuild.name : 'Selecione um servidor'}
+                </Text>
               </View>
 
               <Feather name="chevron-right" size={18} color={theme.colors.heading} />
@@ -84,6 +102,10 @@ export function MatchCreate() {
           <ButtonTextIcon title="Agendar" />
         </View>
       </ScrollView>
+
+      <ModalView visible={guildsModalVisible}>
+        <GuildsList guilds={guilds} onSelectGuild={handleSelectGuild} />
+      </ModalView>
     </KeyboardAvoidingView>
   );
 }
@@ -108,4 +130,6 @@ function DoubleField({ label, divider, ...rest }: DoubleFieldProps) {
     </View>
   )
 }
+
+
 
