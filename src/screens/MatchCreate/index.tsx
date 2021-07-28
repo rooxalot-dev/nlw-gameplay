@@ -16,8 +16,6 @@ import { GuildModel } from "../../models/MatchModel";
 import { guilds } from "../../utils/guids";
 import { LinearGradient } from "expo-linear-gradient";
 import { ModalView } from "../../components/ModalView";
-import { ItemSeparator } from "../../components/ItemSeparator";
-import { Guild } from "../../components/Guild";
 import { GuildsList } from "../../components/GuildsList";
 
 
@@ -35,6 +33,10 @@ export function MatchCreate() {
   const handleOpenGuild = () => {
     setGuildsModalVisible(true);
   };
+
+  const handleCloseModal = () => {
+    setGuildsModalVisible(false);
+  }
 
   const handleSelectGuild = (selectedGuild: GuildModel) => {
     setSelectedGuild(selectedGuild);
@@ -103,7 +105,7 @@ export function MatchCreate() {
         </View>
       </ScrollView>
 
-      <ModalView visible={guildsModalVisible}>
+      <ModalView visible={guildsModalVisible} onCloseModal={handleCloseModal}>
         <GuildsList guilds={guilds} onSelectGuild={handleSelectGuild} />
       </ModalView>
     </KeyboardAvoidingView>

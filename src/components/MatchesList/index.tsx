@@ -28,6 +28,7 @@ export function MatchesList({ matches }: MatchesListProps) {
         renderItem={({ item }) => (
           <Match match={item} onPress={handleMatchDetails} />
         )}
+        contentContainerStyle={{ paddingBottom: 60 }}
         ItemSeparatorComponent={() => (<ItemSeparator />)}
 
       />

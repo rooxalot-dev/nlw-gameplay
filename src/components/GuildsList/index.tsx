@@ -22,6 +22,7 @@ export function GuildsList({ guilds, onSelectGuild }: GuildsListProps) {
             onPress={() => onSelectGuild(item)}
           />
         )}
+        contentContainerStyle={{ paddingVertical: 70 }}
         ItemSeparatorComponent={() => (<ItemSeparator />)}
       />
     </View>

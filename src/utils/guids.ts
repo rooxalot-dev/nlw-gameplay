@@ -14,4 +14,46 @@ export const guilds: GuildModel[] = [
     icon: RedDeadRedemption2Svg,
     owner: true
   },
+  {
+    id: '3',
+    name: 'Lenny? LENNY?!!!',
+    icon: RedDeadRedemption2Svg,
+    owner: true
+  },
+  {
+    id: '4',
+    name: 'Lenny? LENNY?!!!',
+    icon: RedDeadRedemption2Svg,
+    owner: true
+  },
+  {
+    id: '5',
+    name: 'Lenny? LENNY?!!!',
+    icon: RedDeadRedemption2Svg,
+    owner: true
+  },
+  {
+    id: '6',
+    name: 'Lenny? LENNY?!!!',
+    icon: RedDeadRedemption2Svg,
+    owner: true
+  },
+  {
+    id: '7',
+    name: 'Lenny? LENNY?!!!',
+    icon: RedDeadRedemption2Svg,
+    owner: true
+  },
+  {
+    id: '8',
+    name: 'Lenny? LENNY?!!!',
+    icon: RedDeadRedemption2Svg,
+    owner: true
+  },
+  {
+    id: '9',
+    name: 'Lenny? LENNY?!!!',
+    icon: RedDeadRedemption2Svg,
+    owner: true
+  }
 ];

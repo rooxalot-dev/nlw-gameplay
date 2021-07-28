@@ -10,6 +10,7 @@ import { SignIn } from './src/screens/SignIn';
 import { Background } from './src/components/Background';
 import { Home } from './src/screens/Home';
 import { Routes } from './src/routes';
+import { AuthProvider } from './src/hooks/auth';
 
 
 export default function App() {
@@ -28,7 +29,9 @@ export default function App() {
     return (
       <Background>
         <StatusBar style="inverted" translucent />
-        <Routes />
+        <AuthProvider>
+          <Routes />
+        </AuthProvider>
       </ Background>
     );
   }

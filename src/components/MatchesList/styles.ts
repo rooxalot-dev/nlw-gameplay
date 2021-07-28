@@ -2,6 +2,7 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   container: {
-    marginTop: 24
+    marginTop: 24,
+    paddingBottom: 24
   }
 });
