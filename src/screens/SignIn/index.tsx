@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import { styles } from './styles';
@@ -11,10 +11,16 @@ import DiscordImg from '../../assets/discord.png';
 
 export function SignIn() {
   const navigation = useNavigation();
+  const { signIn } = useAuth();
 
 
-  const handleSignIn = () => {
-    navigation.navigate('Home');
+  const handleSignIn = async () => {
+    try {
+      await signIn();
+      navigation.navigate('Home');
+    } catch (error) {
+      Alert.alert(error);
+    }
   }
 
   return (
