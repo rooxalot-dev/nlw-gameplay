@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
-import { View, Text, Image, Alert } from 'react-native';
+import { View, Text, Image, Alert, ActivityIndicator } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
+import { theme } from '../../global/styles/theme';
 import { styles } from './styles';
 import { useAuth } from '../../hooks/auth';
 import { ButtonTextIcon } from '../../components/ButtonTextIcon';
@@ -9,9 +10,10 @@ import illustrationImg from '../../assets/illustration.png';
 import DiscordImg from '../../assets/discord.png';
 
 
+
 export function SignIn() {
   const navigation = useNavigation();
-  const { signIn } = useAuth();
+  const { signIn, loadingUserInfo } = useAuth();
 
 
   const handleSignIn = async () => {
@@ -45,11 +47,12 @@ export function SignIn() {
       </View>
 
       <View style={{ width: '100%', paddingHorizontal: 24 }}>
-        <ButtonTextIcon
-          title="Entrar com Discord"
-          icon={DiscordImg}
-          onPress={handleSignIn}
-        />
+        {
+          loadingUserInfo
+            ? <ActivityIndicator color={theme.colors.primary} />
+            : <ButtonTextIcon title="Entrar com Discord" icon={DiscordImg} onPress={handleSignIn} />
+        }
+
       </View>
     </View>
   );
