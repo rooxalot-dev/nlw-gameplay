@@ -1,7 +1,6 @@
 import axios from "axios";
-import { discordAuthConfig } from "../configs/discordAuth";
 
-const { DISCORD_API_URL } = discordAuthConfig;
+const { DISCORD_API_URL } = process.env;
 
 export const api = axios.create({
   baseURL: DISCORD_API_URL

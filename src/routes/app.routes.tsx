@@ -7,7 +7,7 @@ import { MatchCreate } from '../screens/MatchCreate';
 
 const Stack = createStackNavigator();
 
-export function AuthRoutes() {
+export function AppRoutes() {
   return (
     <Stack.Navigator
       headerMode="none"

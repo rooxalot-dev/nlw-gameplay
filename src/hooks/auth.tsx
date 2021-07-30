@@ -1,10 +1,14 @@
 import React, { ReactNode, createContext, useContext, useState } from "react";
 import * as AuthSession from 'expo-auth-session';
 
-import { discordAuthConfig } from "../configs/discordAuth";
 import { UserType } from "../models/UserModel";
 import { api } from "../services/api";
 
+const { DISCORD_CLIENT_ID } = process.env;
+const { DISCORD_OAUTH_URL } = process.env;
+const { DISCORD_RESPONSE_TYPE } = process.env;
+const { DISCORD_SCOPE } = process.env;
+const { DISCORD_CDN_IMAGE } = process.env;
 
 type AuthContextData = {
   user: UserType,
@@ -18,7 +22,8 @@ type AuthProviderProps = {
 
 type AuthResonseType = AuthSession.AuthSessionResult & {
   params: {
-    access_token: string
+    access_token?: string,
+    error?: string;
   }
 }
 
@@ -29,7 +34,6 @@ function AuthProvider({ children }: AuthProviderProps) {
   const [loadingUserInfo, setLoadingUserInfo] = useState<boolean>(false);
 
   async function signIn() {
-    const { DISCORD_CLIENT_ID, DISCORD_OAUTH_URL, DISCORD_RESPONSE_TYPE, DISCORD_SCOPE, DISCORD_CDN_IMAGE } = discordAuthConfig;
     const authUrl = `${api.defaults.baseURL}/oauth2/authorize?client_id=${DISCORD_CLIENT_ID}&redirect_uri=${DISCORD_OAUTH_URL}&response_type=${DISCORD_RESPONSE_TYPE}&scope=${DISCORD_SCOPE}`;
 
     try {
@@ -37,7 +41,7 @@ function AuthProvider({ children }: AuthProviderProps) {
 
       const { type, params } = await AuthSession.startAsync({ authUrl }) as AuthResonseType;
 
-      if (type === 'success') {
+      if (type === 'success' && !params.error) {
         api.defaults.headers.authorization = `Bearer ${params.access_token}`;
         const { data: userInfo } = await api.get<UserType>('/users/@me');
 
@@ -49,7 +53,7 @@ function AuthProvider({ children }: AuthProviderProps) {
           ...userInfo,
           firstName,
           avatar,
-          token
+          token: String(token)
         });
       }
     } catch {
