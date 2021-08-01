@@ -22,7 +22,7 @@ export const styles = StyleSheet.create({
   },
   serverSelect: {
     width: '100%',
-    height: 68,
+    height: 66,
     paddingRight: 24,
     flexDirection: 'row',
     alignItems: 'center',

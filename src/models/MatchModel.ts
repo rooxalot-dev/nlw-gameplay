@@ -12,7 +12,7 @@ export interface MatchModel {
 
 export type GuildModel = {
   id: string;
+  icon: string;
   name: string;
-  icon: React.FC<SvgProps> | any,
   owner: boolean
 }
