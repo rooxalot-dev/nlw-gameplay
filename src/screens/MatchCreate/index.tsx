@@ -12,7 +12,7 @@ import { SmallInput } from "../../components/SmallInput";
 import { TextArea } from "../../components/TextArea";
 import { ButtonTextIcon } from "../../components/ButtonTextIcon";
 
-import { GuildModel } from "../../models/MatchModel";
+import { GuildModel, MatchModel } from "../../models/MatchModel";
 import { ModalView } from "../../components/ModalView";
 import { GuildsList } from "../../components/GuildsList";
 import { GuildIcon } from "../../components/GuildIcon";
@@ -25,6 +25,7 @@ import { api } from "../../services/api";
 import { useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { COLLECTION_APPOINTMENTS } from "../../configs/storage";
+import { Alert } from "react-native";
 
 
 export function MatchCreate() {
@@ -33,7 +34,7 @@ export function MatchCreate() {
   const [guildsModalVisible, setGuildsModalVisible] = useState(false);
   const [loadingGuilds, setLoadingGuilds] = useState(true);
   const [guilds, setGuilds] = useState<GuildModel[]>([]);
-  const [selectedGuild, setSelectedGuild] = useState<GuildModel | null>(null);
+  const [selectedGuild, setSelectedGuild] = useState<GuildModel>({} as GuildModel);
 
   const [day, setDay] = useState('');
   const [month, setMonth] = useState('');
@@ -87,8 +88,8 @@ export function MatchCreate() {
   }
 
   const handleSaveAppointment = async (): Promise<void> => {
-    const newAppointment = {
-      id: uuid.v4(),
+    const newAppointment: MatchModel = {
+      id: String(uuid.v4()),
       guild: selectedGuild,
       category: selectedCategory,
       date: `${day}/${month} às ${hour}:${minute}h`,
@@ -98,12 +99,12 @@ export function MatchCreate() {
     const storage = await AsyncStorage.getItem(COLLECTION_APPOINTMENTS);
     const appointments = storage ? JSON.parse(storage) : [];
 
-    appointments
-
     await AsyncStorage.setItem(
       COLLECTION_APPOINTMENTS,
       JSON.stringify([...appointments, newAppointment])
     );
+
+    Alert.alert('Sucesso', `Partida agendada para ${newAppointment.date}`);
 
     navigate('Home');
   }

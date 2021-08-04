@@ -63,7 +63,6 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   guildIcon: {
-    color: theme.colors.primary,
     marginRight: 6
   },
   guildText: {

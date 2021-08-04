@@ -16,8 +16,8 @@ export function MatchesList({ matches }: MatchesListProps) {
 
   const { navigate } = useNavigation();
 
-  function handleMatchDetails() {
-    navigate('MatchDetails');
+  function handleMatchDetails(item: MatchModel) {
+    navigate('MatchDetails', item);
   }
 
   return (
@@ -26,7 +26,7 @@ export function MatchesList({ matches }: MatchesListProps) {
         data={matches}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <Match match={item} onPress={handleMatchDetails} />
+          <Match match={item} onPress={() => handleMatchDetails(item)} />
         )}
         contentContainerStyle={{ paddingBottom: 60 }}
         ItemSeparatorComponent={() => (<ItemSeparator />)}
