@@ -1,14 +1,16 @@
-import React, { useState, useCallback } from "react";
-import { ImageBackground, View, Text, FlatList, Alert } from "react-native";
+import React, { useState } from "react";
+import { Platform, ImageBackground, View, Text, FlatList, Alert, Share } from "react-native";
 import { useRoute } from "@react-navigation/native";
 import { BorderlessButton } from "react-native-gesture-handler";
 import { Fontisto } from "@expo/vector-icons";
+import { openURL } from 'expo-linking';
 
 import { Header } from "../../components/Header";
 import { ListHeader } from "../../components/ListHeader";
 import { ItemSeparator } from "../../components/ItemSeparator";
 import { Member } from "../../components/Member";
 import { ButtonTextIcon } from "../../components/ButtonTextIcon";
+import Loading from "../../components/Loading";
 
 import { MatchModel } from "../../models/MatchModel";
 import { MemberModel } from "../../models/MemberModel";
@@ -20,7 +22,6 @@ import { theme } from "../../global/styles/theme";
 import { styles } from "./styles";
 import { useEffect } from "react";
 import { api } from "../../services/api";
-import Loading from "../../components/Loading";
 
 type GuildWidget = {
   id: string;
@@ -33,7 +34,7 @@ type GuildWidget = {
 export function MatchDetails() {
   const [matchDetail, setMatchDetail] = useState<MatchModel | null>(null);
   const [matchGuildWidget, setMatchGuildWidget] = useState<GuildWidget>({} as GuildWidget);
-  const [loadingGuildWidget, setLoadingGuildWidget] = useState<boolean>(false);
+  const [loadingGuildWidget, setLoadingGuildWidget] = useState<boolean>(true);
 
   const { params: match } = useRoute();
 
@@ -43,7 +44,7 @@ export function MatchDetails() {
       setMatchDetail(matchObj);
       fetchGuildInfo(matchObj);
     }
-  }, []);
+  }, [match]);
 
   const fetchGuildInfo = async (match: MatchModel) => {
     try {
@@ -58,31 +59,26 @@ export function MatchDetails() {
     }
   };
 
-  // const members: MemberModel[] = [
-  //   {
-  //     id: '1',
-  //     username: 'Rodrigo Martins',
-  //     avatar_url: 'https://github.com/rooxalot-dev.png',
-  //     status: 'online'
-  //   },
-  //   {
-  //     id: '2',
-  //     username: 'Matheus',
-  //     avatar_url: 'https://github.com/rooxalot-dev.png',
-  //     status: 'offline'
-  //   },
-  //   {
-  //     id: '3',
-  //     username: 'Rodrigo',
-  //     avatar_url: 'https://github.com/rooxalot-dev.png',
-  //     status: 'online'
-  //   },
-  // ];
+  function handleShareInvitation() {
+    const message = Platform.OS === 'ios'
+      ? `Junte-se a ${matchDetail?.guild.name}`
+      : matchGuildWidget.instant_invite;
+
+    Share.share({
+      message,
+      url: matchGuildWidget.instant_invite
+    });
+  };
+
+  function handleEnterServer() {
+    openURL(matchGuildWidget.instant_invite);
+  }
 
   return (
     <View style={styles.container}>
       <Header title="Detalhes" action={
-        <BorderlessButton>
+        !!matchGuildWidget?.instant_invite &&
+        <BorderlessButton activeOpacity={0.7} onPress={() => handleShareInvitation()}>
           <Fontisto name="share" size={20} color={theme.colors.primary} />
         </BorderlessButton>
       } />
@@ -111,9 +107,16 @@ export function MatchDetails() {
           />
       }
 
-      <View style={styles.footer}>
-        <ButtonTextIcon title="Entrar na partida" icon={DiscordImg} />
-      </View>
+      {
+        !!matchGuildWidget?.instant_invite &&
+        <View style={styles.footer}>
+          <ButtonTextIcon
+            title="Entrar na partida"
+            icon={DiscordImg}
+            onPress={handleEnterServer}
+          />
+        </View>
+      }
 
     </View>
   );

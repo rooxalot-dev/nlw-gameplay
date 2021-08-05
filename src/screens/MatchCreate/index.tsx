@@ -1,31 +1,29 @@
 import React, { useState } from "react";
-import { View, Text, TextInputProps, KeyboardAvoidingView, Platform } from "react-native";
+import { View, Text, KeyboardAvoidingView, Alert, Platform } from "react-native";
 import { RectButton, ScrollView } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Feather } from '@expo/vector-icons';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import uuid from 'react-native-uuid';
+
+import { COLLECTION_APPOINTMENTS } from "../../configs/storage";
+import { api } from "../../services/api";
 
 import { Header } from "../../components/Header";
 import { CategoryList } from "../../components/CategoryList";
-import { SmallInput } from "../../components/SmallInput";
+import { DoubleField } from "../../components/DoubleField";
 import { TextArea } from "../../components/TextArea";
 import { ButtonTextIcon } from "../../components/ButtonTextIcon";
-
-import { GuildModel, MatchModel } from "../../models/MatchModel";
 import { ModalView } from "../../components/ModalView";
 import { GuildsList } from "../../components/GuildsList";
 import { GuildIcon } from "../../components/GuildIcon";
 import Loading from "../../components/Loading";
 
+import { GuildModel, MatchModel } from "../../models/MatchModel";
+
 import { theme } from "../../global/styles/theme";
 import { styles } from "./styles";
-
-import { api } from "../../services/api";
-import { useEffect } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { COLLECTION_APPOINTMENTS } from "../../configs/storage";
-import { Alert } from "react-native";
 
 
 export function MatchCreate() {
@@ -183,36 +181,6 @@ export function MatchCreate() {
   );
 }
 
-type DoubleFieldProps = TextInputProps & {
-  label: string;
-  divider: string;
-  onValuesChange?: (values: string[]) => void;
-}
-
-function DoubleField({ label, divider, onValuesChange, ...rest }: DoubleFieldProps) {
-  const [value1, setValue1] = useState('');
-  const [value2, setValue2] = useState('');
-
-  useEffect(() => {
-    if (onValuesChange) {
-      onValuesChange([value1, value2]);
-    }
-  }, [value1, value2]);
-
-  return (
-    <View style={styles.field}>
-      <View>
-        <Text style={styles.label}>{label}</Text>
-      </View>
-
-      <View style={styles.fieldRow}>
-        <SmallInput {...rest} value={value1} onChangeText={(text) => setValue1(text)} />
-        <Text style={styles.divider}> {divider} </Text>
-        <SmallInput {...rest} value={value2} onChangeText={(text) => setValue2(text)} />
-      </View>
-    </View>
-  )
-}
 
 
 

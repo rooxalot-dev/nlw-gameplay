@@ -32,7 +32,13 @@ export function Match({ match, ...rest }: MatchProps) {
             {category && <Text style={styles.categoryTitle}>{category.title}</Text>}
           </View>
 
-          <Text style={styles.game}>{match.guild.owner ? 'Anfitrião' : 'Convidado'}</Text>
+          <Text style={styles.game}>
+            {
+              match.description.length > 20
+                ? match.description.substring(0, 20) + '...'
+                : match.description
+            }
+          </Text>
 
           <View style={styles.dateGuildCount}>
             <View style={styles.dateInfo}>
