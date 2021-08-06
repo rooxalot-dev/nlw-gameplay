@@ -16,7 +16,8 @@ const { DISCORD_CDN_IMAGE } = process.env;
 type AuthContextData = {
   user: UserType,
   loadingUserInfo: boolean,
-  signIn: () => Promise<void>
+  signIn: () => Promise<void>,
+  signOut: () => Promise<void>
 }
 
 type AuthProviderProps = {
@@ -69,6 +70,11 @@ function AuthProvider({ children }: AuthProviderProps) {
     }
   }
 
+  async function signOut() {
+    await AsyncStorage.removeItem(COLLECTION_USERS);
+    setUser({} as UserType);
+  }
+
   async function loadUserStorage(): Promise<void> {
     const storageStringfiedUser = await AsyncStorage.getItem(COLLECTION_USERS);
     if (storageStringfiedUser) {
@@ -83,7 +89,7 @@ function AuthProvider({ children }: AuthProviderProps) {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, signIn, loadingUserInfo } as AuthContextData}>
+    <AuthContext.Provider value={{ user, signIn, signOut, loadingUserInfo } as AuthContextData}>
       {children}
     </AuthContext.Provider>
   );
